@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construyendo un Espejo de Paz</title>
+  <style>
+    :root{
+      --bg:#f4f7f6;
+      --card:#ffffff;
+      --primary:#1f5c55;
+      --secondary:#3f8f83;
+      --accent:#d8eee8;
+      --text:#243331;
+      --muted:#667572;
+      --shadow:0 10px 30px rgba(31,92,85,.10);
+    }
+
+    *{box-sizing:border-box;scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+
+    header{
+      min-height:78vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:60px 20px;
+      background:
+        linear-gradient(rgba(17,65,59,.88),rgba(31,92,85,.90)),
+        radial-gradient(circle at top,#77bdb0,transparent 55%);
+      color:white;
+    }
+
+    .hero{max-width:900px}
+    .school{
+      text-transform:uppercase;
+      letter-spacing:2px;
+      font-size:.9rem;
+      opacity:.85;
+      margin-bottom:20px;
+    }
+
+    h1{
+      font-size:clamp(2.5rem,7vw,5.5rem);
+      line-height:1.05;
+      margin:0 0 22px;
+    }
+
+    .subtitle{
+      font-size:1.2rem;
+      max-width:700px;
+      margin:0 auto 30px;
+      opacity:.92;
+    }
+
+    .info{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin-top:30px;
+    }
+
+    .pill{
+      padding:8px 15px;
+      border:1px solid rgba(255,255,255,.35);
+      border-radius:30px;
+      background:rgba(255,255,255,.10);
+      font-size:.9rem;
+    }
+
+    nav{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid #dce6e3;
+    }
+
+    nav ul{
+      max-width:1100px;
+      margin:auto;
+      padding:0 15px;
+      list-style:none;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:5px;
+    }
+
+    nav a{
+      display:block;
+      padding:13px 15px;
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:bold;
+      font-size:.9rem;
+    }
+
+    nav a:hover{background:var(--accent);border-radius:8px}
+
+    main{
+      max-width:1100px;
+      margin:auto;
+      padding:55px 20px;
+    }
+
+    section{
+      margin-bottom:65px;
+      scroll-margin-top:80px;
+    }
+
+    .section-title{
+      font-size:2rem;
+      color:var(--primary);
+      margin-bottom:25px;
+    }
+
+    .card{
+      background:var(--card);
+      padding:30px;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
+    }
+
+    .question{
+      font-size:1.35rem;
+      font-weight:bold;
+      color:var(--primary);
+      border-left:5px solid var(--secondary);
+      padding-left:18px;
+    }
+
+    .thesis{
+      background:var(--accent);
+      border-left:6px solid var(--primary);
+    }
+
+    .label{
+      color:var(--secondary);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:.78rem;
+      font-weight:bold;
+    }
+
+    .argument-title{
+      margin-top:8px;
+      font-size:1.45rem;
+      color:var(--primary);
+    }
+
+    blockquote{
+      margin:20px 0;
+      padding:20px 25px;
+      border-left:5px solid var(--secondary);
+      background:#f0f6f4;
+      font-style:italic;
+      color:#40504d;
+    }
+
+    .reflection{
+      background:#fbfcfc;
+      border:1px solid #dfe9e6;
+    }
+
+    .examples{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .example{
+      background:white;
+      border-radius:16px;
+      padding:25px;
+      box-shadow:var(--shadow);
+      border-top:5px solid var(--secondary);
+    }
+
+    .example h3{
+      color:var(--primary);
+      margin-top:0;
+    }
+
+    .conclusion{
+      background:linear-gradient(135deg,#1f5c55,#3f8f83);
+      color:white;
+    }
+
+    .conclusion h2{color:white}
+
+    .members{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:10px;
+      margin-top:20px;
+    }
+
+    .member{
+      background:#f4f8f7;
+      padding:12px;
+      border-radius:10px;
+      text-align:center;
+      font-weight:bold;
+    }
+
+    .bibliography a{
+      color:var(--primary);
+      word-break:break-all;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px 20px;
+      background:#173f3a;
+      color:#dcebe8;
+    }
+
+    @media(max-width:750px){
+      .examples{grid-template-columns:1fr}
+      .card{padding:22px}
+      nav a{padding:10px 8px;font-size:.8rem}
+    }
+  </style>
+</head>
+
+<body>
+
+<header id="inicio">
+  <div class="hero">
+    <div class="school">Unidad Educativa Santa María Eufrasia</div>
+    <h1>Construyendo un<br>Espejo de Paz</h1>
+    <p class="subtitle">
+      Proyecto de Filosofía sobre la resolución pacífica de conflictos,
+      la cooperación, el diálogo y el respeto mutuo.
+    </p>
+
+    <div class="info">
+      <span class="pill">Grupo 3</span>
+      <span class="pill">2do BGU “B”</span>
+      <span class="pill">23/09/2026</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#pregunta">Pregunta</a></li>
+    <li><a href="#tesis">Tesis</a></li>
+    <li><a href="#argumentos">Argumentos</a></li>
+    <li><a href="#contraargumento">Contraargumento</a></li>
+    <li><a href="#ejemplos">Ejemplos</a></li>
+    <li><a href="#conclusion">Conclusión</a></li>
+    <li><a href="#bibliografia">Bibliografía</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section id="pregunta">
+    <h2 class="section-title">La pregunta central</h2>
+    <div class="card">
+      <div class="question">
+        ¿Es posible resolver un conflicto sin que alguien pierda,
+        o la paz siempre exige ceder algo?
+      </div>
+
+      <p>
+        Sí, se puede resolver un conflicto sin que nadie pierda, pero eso
+        exige cambiar la forma en que lo miramos. Cuando dejamos de discutir
+        por “quién tiene la razón” y nos enfocamos en entender qué es lo que
+        realmente le importa a cada uno, casi siempre aparecen salidas donde
+        ambos obtienen lo que necesitan.
+      </p>
+
+      <p>
+        Buscar la paz no significa agachar la cabeza ni resignarse a perder
+        algo importante, sino tener la madurez de soltar el orgullo y buscar
+        juntos una solución en la que los dos salgan bien parados.
+      </p>
+    </div>
+  </section>
+
+  <section id="tesis">
+    <h2 class="section-title">Tesis</h2>
+    <div class="card thesis">
+      <p>
+        <strong>
+          Es posible alcanzar una resolución pacífica de un conflicto en la
+          que ninguna parte sea perdedora cuando se adopta un enfoque basado
+          en la cooperación y el diálogo constructivo; sin embargo, esta paz
+          duradera no implica imponer una postura sobre otra ni la resignación
+          de ceder, sino transformar de manera mutua las pretensiones iniciales
+          para priorizar el bienestar común.
+        </strong>
+      </p>
+    </div>
+  </section>
+
+  <section id="argumentos">
+    <h2 class="section-title">Argumentos</h2>
+
+    <div class="card">
+      <div class="label">Argumento 1</div>
+      <h3 class="argument-title">
+        La diferencia entre la negociación de suma cero y la cooperación dialógica
+      </h3>
+
+      <p>
+        En un esquema de pensamiento tradicional, los conflictos suelen
+        abordarse como un juego de “suma cero” donde para que una parte gane,
+        la otra necesariamente debe perder. No obstante, desde la teoría de
+        la resolución de conflictos, el diálogo permite trascender las
+        posiciones rígidas para centrarse en los intereses y necesidades
+        subyacentes.
+      </p>
+
+      <blockquote>
+        “El acuerdo se produce al conciliar los intereses, no las posturas.
+        Detrás de las posturas opuestas residen intereses que se solapan y
+        entran en conflicto, pero también otros que son compartidos”
+        <br><br>
+        <strong>(Fisher et al., 2011, p. 62)</strong>
+      </blockquote>
+
+      <div class="card reflection">
+        <div class="label">Reflexión del grupo</div>
+        <p>
+          Entendemos que “ceder” en una postura inicial no significa perder.
+          Cuando dejamos de discutir por “quién tiene la razón” y nos
+          enfocamos en descubrir las verdaderas necesidades de cada persona,
+          la negociación deja de ser una batalla y se convierte en un
+          ejercicio de cooperación mutua.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">Argumento 2</div>
+      <h3 class="argument-title">
+        El diálogo reflexivo como garante de la paz y la dignidad humana
+      </h3>
+
+      <p>
+        La verdadera paz no se define únicamente como la mera ausencia de
+        violencia o peleas (paz negativa), sino como el establecimiento de
+        justicia y reconocimiento mutuo (paz positiva). Para que un acuerdo
+        sea legítimo, la renuncia a una exigencia desmedida no significa ser
+        humillado o derrotado, sino un acto ético de convivencia.
+      </p>
+
+      <blockquote>
+        “La transformación de conflictos busca construir procesos de cambio
+        constructivo que reduzcan la violencia y incrementen la justicia en
+        las relaciones humanas e interpersonales”
+        <br><br>
+        <strong>(Lederach, 2008, p. 27)</strong>
+      </blockquote>
+
+      <div class="card reflection">
+        <div class="label">Reflexión del grupo</div>
+        <p>
+          Si una persona sale triste o resentida de una discusión porque fue
+          obligada a ceder, la disputa no se ha resuelto. La paz positiva
+          requiere que ambas partes sientan que su dignidad y sus valores
+          fueron respetados a través del diálogo reflexivo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contraargumento">
+    <h2 class="section-title">Contraargumento y refutación</h2>
+
+    <div class="card">
+      <div class="label">Contraargumento</div>
+      <p>
+        Sectores pragmáticos afirman que en la vida cotidiana los recursos
+        (como el tiempo o el espacio) e intereses son limitados y contrapuestos.
+        Por ello, sostienen que cualquier resolución realista de conflictos
+        exige inevitablemente que las partes “cedan algo”, aceptando una
+        pérdida o renuncia parcial como único camino para lograr la paz.
+      </p>
+    </div>
+
+    <div class="card thesis">
+      <div class="label">Refutación</div>
+      <p>
+        Esta postura confunde la flexibilidad en exigencias secundarias con
+        una pérdida de necesidades esenciales. Reajustar un plan inicial
+        mediante el diálogo no constituye una derrota si el resultado final
+        satisface el interés profundo de ambas partes.
+      </p>
+
+      <p>
+        Cuando las personas ceden por obligación o resignación, el
+        resentimiento persiste y el conflicto reaparece; en cambio, la
+        resolución integradora mediante el diálogo constructivo genera un
+        acuerdo donde nadie queda perjudicado en su dignidad ni en sus
+        objetivos principales.
+      </p>
+    </div>
+  </section>
+
+  <section id="ejemplos">
+    <h2 class="section-title">Ejemplos reales y cotidianos</h2>
+
+    <div class="examples">
+
+      <article class="example">
+        <h3>🏫 Ámbito escolar</h3>
+        <p>
+          Dos estudiantes deben realizar una presentación en grupo pero no
+          se ponen de acuerdo sobre qué tema elegir. En lugar de que uno
+          imponga su tema y el otro trabaje a disgusto, dialogan y deciden
+          integrar aspectos de ambas propuestas en un tema interdisciplinario.
+        </p>
+        <p>
+          Ambos reajustaron su idea inicial, pero el resultado final satisface
+          a ambos sin que ninguno quede relegado.
+        </p>
+      </article>
+
+      <article class="example">
+        <h3>🤝 Convivencia escolar</h3>
+        <p>
+          En el uso de las áreas deportivas del colegio durante el receso,
+          dos cursos reclaman el uso de la misma cancha. Si la autoridad se
+          la otorga a un solo grupo, se genera resentimiento.
+        </p>
+        <p>
+          Si los representantes de cada curso dialogan y acuerdan turnarse
+          los días o dividir el espacio en dinámicas compartidas, ambos
+          renuncian a la exclusividad total, pero obtienen un acceso
+          equitativo y justo al espacio.
+        </p>
+      </article>
+
+      <article class="example">
+        <h3>🏠 Vida diaria / familiar</h3>
+        <p>
+          Dos hermanos necesitan utilizar la computadora del hogar al mismo
+          tiempo para sus tareas escolares. En lugar de discutir, conversan
+          sobre sus necesidades específicas.
+        </p>
+        <p>
+          Acuerdan buscar la información desde un teléfono celular y redactar
+          juntos en el equipo, optimizando el tiempo y fortaleciendo la
+          armonía familiar.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="conclusion">
+    <div class="card conclusion">
+      <h2 class="section-title">Conclusión</h2>
+      <p>
+        En conclusión, la resolución pacífica de conflictos no requiere
+        inevitablemente la existencia de un vencedor y un vencido. Aunque la
+        paz exige con frecuencia ajustar o flexibilizar pretensiones
+        individuales, este proceso de “ceder” no debe entenderse como una
+        derrota, sino como una reestructuración ética guiada por la empatía,
+        el diálogo y el respeto mutuo.
+      </p>
+
+      <p>
+        La construcción de una paz auténtica en la comunidad educativa se
+        logra cuando el bien común se posiciona por encima de las posturas
+        individuales.
+      </p>
+    </div>
+  </section>
+
+  <section id="integrantes">
+    <h2 class="section-title">Integrantes</h2>
+    <div class="card">
+      <div class="members">
+        <div class="member">Araujo Benjamín</div>
+        <div class="member">Ceballos Joaquín</div>
+        <div class="member">Cifuentes Alessandro</div>
+        <div class="member">Jurado Elian</div>
+        <div class="member">Landázuri José</div>
+        <div class="member">Vizuete Martin</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bibliografia">
+    <h2 class="section-title">Bibliografía</h2>
+    <div class="card bibliography">
+      <p>
+        <strong>Fisher, Books (2011).</strong><br>
+        <a href="https://books.google.com.ec/books?id=-pA2Dw0Pd-UC" target="_blank">
+          Google Books
+        </a>
+      </p>
+
+      <p>
+        <strong>Follett (1924).</strong><br>
+        <a href="https://books.google.com.ec/books?id=-pA2Dw0Pd-UC" target="_blank">
+          Google Books
+        </a>
+      </p>
+
+      <p>
+        <strong>Galtung (1998).</strong><br>
+        <a href="https://books.google.com.ec/books?id=-pA2Dw0Pd-UC" target="_blank">
+          Google Books
+        </a>
+      </p>
+
+      <p>
+        <strong>Rosenberg (2003).</strong><br>
+        <a href="https://books.google.com.ec/books?id=-pA2Dw0Pd-UC" target="_blank">
+          Google Books
+        </a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong>Proyecto de Filosofía — Construyendo un Espejo de Paz</strong></p>
+  <p>Unidad Educativa Santa María Eufrasia · Grupo 3 · 2do BGU “B”</p>
+</footer>
+
+</body>
+</html>
